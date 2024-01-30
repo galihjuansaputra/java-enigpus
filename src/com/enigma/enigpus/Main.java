@@ -1,6 +1,5 @@
 package com.enigma.enigpus;
 
-import com.enigma.enigpus.entity.Book;
 import com.enigma.enigpus.service.InventoryService;
 import com.enigma.enigpus.service.InventoryServiceImpl;
 import com.enigma.enigpus.view.BookView;

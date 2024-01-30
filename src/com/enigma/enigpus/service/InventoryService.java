@@ -3,6 +3,7 @@ package com.enigma.enigpus.service;
 import com.enigma.enigpus.entity.Book;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface InventoryService {
 
@@ -11,7 +12,7 @@ public interface InventoryService {
     ArrayList<Object> searchBookByTitle(String book);
 
     ArrayList searchBookByCode(String book);
-    ArrayList<Object> getAllBook();
+    List<Book> getAllBook();
 
-    ArrayList<Object> deleteBookByCode(String bookCode);
+    List<Book> deleteBookByCode(String bookCode);
 }
