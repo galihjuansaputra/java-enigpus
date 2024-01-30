@@ -5,8 +5,8 @@ import com.enigma.enigpus.entity.Magazine;
 import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.service.InventoryServiceImpl;
 
+import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Utility {

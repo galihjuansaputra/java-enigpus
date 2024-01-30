@@ -11,6 +11,7 @@ public interface InventoryService {
     ArrayList<Object> searchBookByTitle(String book);
 
     ArrayList searchBookByCode(String book);
-    void deleteBookByCode();
     ArrayList<Object> getAllBook();
+
+    ArrayList<Object> deleteBookByCode(String bookCode);
 }

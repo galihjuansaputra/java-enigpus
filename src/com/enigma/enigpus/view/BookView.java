@@ -4,8 +4,11 @@ import com.enigma.enigpus.entity.Book;
 import com.enigma.enigpus.entity.Magazine;
 import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.service.InventoryService;
+import com.enigma.enigpus.util.FileUtility;
 import com.enigma.enigpus.util.Utility;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +49,18 @@ public class BookView {
                     searchBookMenu();
                     break;
                 case "4":
+
                     break;
                 case "x", "X":
                     isValid = false;
             }
         }
+    }
+
+    private void deleteBookView() {
+        System.out.println("Masukan Kode Buku Untuk Dihapus: ");
+        String bookCode = Utility.inputStr();
+        FileUtility.reassignFiles(bookCode);
     }
 
     private void searchBookMenu() {

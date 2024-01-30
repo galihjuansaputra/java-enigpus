@@ -35,4 +35,22 @@ public class FileUtility {
             throw new RuntimeException(e);
         }
     }
+
+    public static void reassignFiles(String bookCode) {
+
+        ArrayList<Object> books = Utility.inventoryService.deleteBookByCode(bookCode);
+
+
+        for (Object book : books) {
+            try (OutputStream os = Files.newOutputStream(bookPath)) {
+                try (ObjectOutputStream oos = new ObjectOutputStream(os)) {
+                    oos.writeObject(book);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
