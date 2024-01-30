@@ -8,7 +8,8 @@ public interface InventoryService {
 
     void addBook(Book book);
 
-    void searchBookByTitle();
+    ArrayList<Object> searchBookByTitle(String book);
+
     void searchBookByCode();
     void deleteBookByCode();
     ArrayList<Object> getAllBook();

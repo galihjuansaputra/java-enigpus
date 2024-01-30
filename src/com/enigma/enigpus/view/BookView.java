@@ -27,7 +27,7 @@ public class BookView {
             System.out.print("""
                     1. Tambah Data Buku
                     2. Lihat Semua Data Buku
-                    3. Edit Data Buku
+                    3. Cari Data Buku
                     4. Hapus Data Buku
                     X. Keluar
                     """);
@@ -43,6 +43,7 @@ public class BookView {
                     viewAllBook();
                     break;
                 case "3":
+                    searchBookMenu();
                     break;
                 case "4":
                     break;
@@ -50,6 +51,42 @@ public class BookView {
                     isValid = false;
             }
         }
+    }
+
+    private void searchBookMenu() {
+        while (isValid) {
+            System.out.println("Tambah Data Buku");
+            System.out.print("""
+                    1. Cari Buku Berdasarkan Judul
+                    2. Cari Buku Berdasarkan Kode Buku
+                    0. Kembali
+                    """);
+            System.out.println("-".repeat(120));
+            System.out.print("Input Menu: ");
+            String searchType = Utility.inputStr();
+            System.out.println();
+
+            switch (searchType) {
+                case "1":
+                    searchByTitleView();
+                    mainMenu();
+                    return;
+                case "2":
+                    mainMenu();
+                    return;
+                case "0":
+                    mainMenu();
+                    isValid = false;
+            }
+        }
+    }
+
+    private void searchByTitleView(){
+        System.out.println("Input Judul Buku: ");
+        String searchBook = Utility.inputStr();
+        ArrayList<Object> booksFiltered = inventoryService.searchBookByTitle(searchBook);
+        System.out.println(booksFiltered);
+
     }
 
     private void viewAllBook() {

@@ -24,7 +24,9 @@ public class Utility {
         for (Object book : books) {
             if (book instanceof Novel) {
                 Novel novel = (Novel) book;
-                int novelCode = Integer.parseInt(novel.getCode());
+                String novelRawCode = novel.getCode();
+                int lastindex =  novelRawCode.length()-1;
+                int novelCode = Integer.parseInt(String.valueOf(novelRawCode.charAt(lastindex)));
                 if (novelCode >= code) {
                     code = novelCode;
                 }
@@ -42,7 +44,9 @@ public class Utility {
         for (Object book : books) {
             if (book instanceof Magazine) {
                 Magazine magazine = (Magazine) book;
-                int magazineCode = Integer.parseInt(magazine.getCode());
+                String novelRawCode = magazine.getCode();
+                int lastindex =  novelRawCode.length()-1;
+                int magazineCode = Integer.parseInt(String.valueOf(novelRawCode.charAt(lastindex)));
                 if (magazineCode >= code) {
                     code = magazineCode;
                 }

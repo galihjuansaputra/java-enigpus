@@ -1,6 +1,8 @@
 package com.enigma.enigpus.service;
 
 import com.enigma.enigpus.entity.Book;
+import com.enigma.enigpus.entity.Magazine;
+import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.util.FileUtility;
 
 import java.util.ArrayList;
@@ -26,10 +28,20 @@ public class InventoryServiceImpl implements InventoryService {
         return (ArrayList<Object>) object;
     }
 
+    public ArrayList<Object> searchBookByTitle(String searchBook) {
+        ArrayList<Object> books = getAllBook();
+        Book magazine = new Magazine();
+        Book novel = new Novel();
 
-    @Override
-    public void searchBookByTitle() {
+        ArrayList<Object> booksFiltered = new ArrayList<>();
 
+        for (Object book : books) {
+            if (magazine.getTitle().contains(searchBook) || novel.getTitle().contains(searchBook)){
+                booksFiltered.add(book);
+            }
+        }
+
+        return booksFiltered;
     }
 
     @Override
