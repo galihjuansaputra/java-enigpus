@@ -6,6 +6,7 @@ import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.service.InventoryService;
 import com.enigma.enigpus.util.Utility;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,15 @@ public class BookView {
 
     private void viewAllBook() {
         List books = inventoryService.getAllBook();
+
+        if (books.isEmpty()) {
+            System.out.println("Data Kosong");
+            System.out.println();
+            return;
+        }
+
         System.out.println("Data Buku Novel: ");
+
         String formatNovel = String.format("%-10s %-30s %-30s %-30s %-30s", "Kode", "Judul", "Penulis", "Penerbit", "Tahun Terbit");
 
         System.out.println(formatNovel);
@@ -72,8 +81,8 @@ public class BookView {
         System.out.print(formatMagazine);
         for (Object book : books) {
             if (book instanceof Magazine) {
-            Magazine magazine = (Magazine) book;
-            System.out.printf("%-10s %-30s %-30s %-30s", magazine.getCode(), magazine.getTitle(), magazine.getReleasePer(), magazine.getReleaseYear());
+                Magazine magazine = (Magazine) book;
+                System.out.printf("%-10s %-30s %-30s %-30s", magazine.getCode(), magazine.getTitle(), magazine.getReleasePer(), magazine.getReleaseYear());
             }
             System.out.println();
         }
@@ -111,7 +120,7 @@ public class BookView {
     }
 
     private void saveMagazineView() {
-        String code = Utility.incrementNovelCode();
+        String code = Utility.incrementMagazineCode();
 
         System.out.print("Input Judul: ");
         String title = Utility.inputStr();
@@ -120,7 +129,9 @@ public class BookView {
         System.out.print("Input Tahun Terbit: ");
         int year = Utility.inputInt();
 
-        Book magazine = new Magazine(code, title, releasePer, year);
+        String codeFormat = year + "-B-" + code;
+
+        Book magazine = new Magazine(codeFormat, title, releasePer, year);
         inventoryService.addBook(magazine);
         System.out.println(magazine);
 
@@ -138,7 +149,9 @@ public class BookView {
         System.out.print("Input Penulis: ");
         String penulis = Utility.inputStr();
 
-        Book novel = new Novel(code, title, publisher, year, penulis);
+        String codeFormat = year + "-A-" + code;
+
+        Book novel = new Novel(codeFormat, title, publisher, year, penulis);
         inventoryService.addBook(novel);
         System.out.println(novel);
 

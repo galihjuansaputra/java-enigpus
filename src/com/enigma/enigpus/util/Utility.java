@@ -35,6 +35,24 @@ public class Utility {
 
     }
 
+    public static String incrementMagazineCode() {
+        ArrayList<Object> books = inventoryService.getAllBook();
+        int code = 0;
+
+        for (Object book : books) {
+            if (book instanceof Magazine) {
+                Magazine magazine = (Magazine) book;
+                int magazineCode = Integer.parseInt(magazine.getCode());
+                if (magazineCode >= code) {
+                    code = magazineCode;
+                }
+            }
+        }
+
+        return String.valueOf(code+1);
+
+    }
+
     public static String inputStr() {
         while (true) {
             String input = scanner.nextLine();
