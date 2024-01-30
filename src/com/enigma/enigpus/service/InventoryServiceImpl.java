@@ -7,6 +7,7 @@ import com.enigma.enigpus.util.FileUtility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class InventoryServiceImpl implements InventoryService {
 
@@ -30,13 +31,24 @@ public class InventoryServiceImpl implements InventoryService {
 
     public ArrayList<Object> searchBookByTitle(String searchBook) {
         ArrayList<Object> books = getAllBook();
-        Book magazine = new Magazine();
-        Book novel = new Novel();
-
         ArrayList<Object> booksFiltered = new ArrayList<>();
 
         for (Object book : books) {
-            if (magazine.getTitle().contains(searchBook) || novel.getTitle().contains(searchBook)){
+            Book magazine = new Magazine();
+            Book novel = new Novel();
+
+            if (book instanceof Magazine){
+                magazine = (Magazine) book;
+            }
+
+            if (book instanceof Novel){
+                novel = (Novel) book;
+            }
+
+            String filteredMagazine = magazine.getTitle();
+            String filteredString = novel.getTitle();
+
+            if (Objects.equals(filteredMagazine, searchBook) || Objects.equals(filteredString, searchBook)){
                 booksFiltered.add(book);
             }
         }
@@ -44,9 +56,31 @@ public class InventoryServiceImpl implements InventoryService {
         return booksFiltered;
     }
 
-    @Override
-    public void searchBookByCode() {
+    public ArrayList<Object> searchBookByCode(String bookCode) {
+        ArrayList<Object> books = getAllBook();
+        ArrayList<Object> booksFiltered = new ArrayList<>();
 
+        for (Object book : books) {
+            Book magazine = new Magazine();
+            Book novel = new Novel();
+
+            if (book instanceof Magazine){
+                magazine = (Magazine) book;
+            }
+
+            if (book instanceof Novel){
+                novel = (Novel) book;
+            }
+
+            String filteredMagazine = magazine.getCode();
+            String filteredString = novel.getCode();
+
+            if (Objects.equals(filteredMagazine, bookCode) || Objects.equals(filteredString, bookCode)){
+                booksFiltered.add(book);
+            }
+        }
+
+        return booksFiltered;
     }
 
     @Override

@@ -66,4 +66,15 @@ public class Novel extends Book implements Serializable {
     public void setWriter(String writer) {
         this.writer = writer;
     }
+
+    @Override
+    public String toString() {
+        return "Novel{" +
+                "code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", writer='" + writer + '\'' +
+                '}';
+    }
 }

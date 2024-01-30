@@ -56,4 +56,14 @@ public class Magazine extends Book implements Serializable {
     public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
+
+    @Override
+    public String toString() {
+        return "Magazine{" +
+                "code='" + code + '\'' +
+                ", title='" + title + '\'' +
+                ", releasePer='" + releasePer + '\'' +
+                ", releaseYear=" + releaseYear +
+                '}';
+    }
 }

@@ -10,7 +10,7 @@ public interface InventoryService {
 
     ArrayList<Object> searchBookByTitle(String book);
 
-    void searchBookByCode();
+    ArrayList searchBookByCode(String book);
     void deleteBookByCode();
     ArrayList<Object> getAllBook();
 }

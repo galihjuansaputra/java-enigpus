@@ -55,7 +55,7 @@ public class BookView {
 
     private void searchBookMenu() {
         while (isValid) {
-            System.out.println("Tambah Data Buku");
+            System.out.println("Cari Buku: ");
             System.out.print("""
                     1. Cari Buku Berdasarkan Judul
                     2. Cari Buku Berdasarkan Kode Buku
@@ -72,6 +72,7 @@ public class BookView {
                     mainMenu();
                     return;
                 case "2":
+                    searchByCodeView();
                     mainMenu();
                     return;
                 case "0":
@@ -86,7 +87,13 @@ public class BookView {
         String searchBook = Utility.inputStr();
         ArrayList<Object> booksFiltered = inventoryService.searchBookByTitle(searchBook);
         System.out.println(booksFiltered);
+    }
 
+    private void searchByCodeView(){
+        System.out.println("Input Kode Buku: ");
+        String searchBook = Utility.inputStr();
+        ArrayList<Object> booksFiltered = inventoryService.searchBookByCode(searchBook);
+        System.out.println(booksFiltered);
     }
 
     private void viewAllBook() {
@@ -110,7 +117,6 @@ public class BookView {
             }
             System.out.println();
         }
-        System.out.println();
 
         System.out.println("Data Majalah: ");
         String formatMagazine = String.format("%-10s %-30s %-30s %-30s", "Kode", "Judul", "Penerbit", "Tahun Terbit");
