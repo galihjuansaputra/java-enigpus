@@ -2,7 +2,7 @@ package com.enigma.enigpus.entity;
 
 public class Magazine extends Book{
 
-    String magazineCode;
+    String code;
     String title;
     String releasePer;
     Integer releaseYear;
