@@ -19,19 +19,19 @@ public class Utility {
 
     public static String incrementNovelCode() {
         ArrayList<Object> books = inventoryService.getAllBook();
-        int code = 1;
+        int code = 0;
 
-        if (novel.getCode() == null ) {
-            return String.valueOf(code);
-        }
-
-        int novelCode = Integer.parseInt(novel.getCode());
-        for (int i = 0; i < books.size(); i++) {
-            if (novelCode > code) {
-                code = novelCode;
+        for (Object book : books) {
+            if (book instanceof Novel) {
+                Novel novel = (Novel) book;
+                int novelCode = Integer.parseInt(novel.getCode());
+                if (novelCode >= code) {
+                    code = novelCode;
+                }
             }
         }
-        return String.valueOf(code);
+
+        return String.valueOf(code+1);
 
     }
 
