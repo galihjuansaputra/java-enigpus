@@ -5,8 +5,7 @@ import com.enigma.enigpus.entity.Magazine;
 import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.service.InventoryServiceImpl;
 
-import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Utility {
@@ -18,7 +17,7 @@ public class Utility {
 
 
     public static String incrementNovelCode() {
-        ArrayList<Object> books = inventoryService.getAllBook();
+        List<Book> books = inventoryService.getAllBook();
         int code = 0;
 
         for (Object book : books) {
@@ -38,7 +37,7 @@ public class Utility {
     }
 
     public static String incrementMagazineCode() {
-        ArrayList<Object> books = inventoryService.getAllBook();
+        List<Book> books = inventoryService.getAllBook();
         int code = 0;
 
         for (Object book : books) {

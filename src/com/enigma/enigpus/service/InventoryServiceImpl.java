@@ -5,9 +5,6 @@ import com.enigma.enigpus.entity.Magazine;
 import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.util.FileUtility;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,24 +13,24 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public void addBook(Book book) {
-        List<Object> books = getAllBook();
+        List<Book> books = getAllBook();
         books.add(book);
         FileUtility.saveObject(books);
     }
 
     @Override
-    public ArrayList<Object> getAllBook() {
+    public List<Book> getAllBook() {
         Object object = FileUtility.readObject();
 
         if (object == null) {
             return new ArrayList<>();
         }
 
-        return (ArrayList<Object>) object;
+        return (List<Book>) object;
     }
 
     public ArrayList<Object> searchBookByTitle(String searchBook) {
-        ArrayList<Object> books = getAllBook();
+        List<Book> books = getAllBook();
         ArrayList<Object> booksFiltered = new ArrayList<>();
 
         for (Object book : books) {
@@ -60,7 +57,7 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     public ArrayList<Object> searchBookByCode(String bookCode) {
-        ArrayList<Object> books = getAllBook();
+        List<Book> books = getAllBook();
         ArrayList<Object> booksFiltered = new ArrayList<>();
 
         for (Object book : books) {
@@ -87,41 +84,12 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public ArrayList<Object> deleteBookByCode(String bookCode) {
-        ArrayList<Object> books = getAllBook();
-        ArrayList<Object> booksDeleted = new ArrayList<>();
+    public List<Book> deleteBookByCode(String bookCode) {
+        List<Book> books = getAllBook();
 
-        for (Object book : books) {
-            Book magazine = new Magazine();
-            Book novel = new Novel();
-
-            if (book instanceof Magazine) {
-                magazine = (Magazine) book;
-            }
-
-            if (book instanceof Novel) {
-                novel = (Novel) book;
-            }
-
-            String filteredMagazine = magazine.getCode();
-            String filteredNovel = novel.getCode();
-
-            if (!Objects.equals(filteredMagazine, bookCode)) {
-                booksDeleted.add(magazine);
-            }
-
-            if (!Objects.equals(filteredNovel, bookCode)) {
-                booksDeleted.add(magazine);
-            }
-        }
-
-        try {
-            Files.deleteIfExists(Path.of("book"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return booksDeleted;
+        books.removeIf(book -> book.getCode().equals(bookCode));
+        FileUtility.saveObject(books);
+        return books;
     }
 
 }

@@ -4,12 +4,8 @@ import com.enigma.enigpus.entity.Book;
 import com.enigma.enigpus.entity.Magazine;
 import com.enigma.enigpus.entity.Novel;
 import com.enigma.enigpus.service.InventoryService;
-import com.enigma.enigpus.util.FileUtility;
 import com.enigma.enigpus.util.Utility;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +45,7 @@ public class BookView {
                     searchBookMenu();
                     break;
                 case "4":
-
+                    deleteBookView();
                     break;
                 case "x", "X":
                     isValid = false;
@@ -58,9 +54,9 @@ public class BookView {
     }
 
     private void deleteBookView() {
-        System.out.println("Masukan Kode Buku Untuk Dihapus: ");
+        System.out.print("Masukan Kode Buku Untuk Dihapus: ");
         String bookCode = Utility.inputStr();
-        FileUtility.reassignFiles(bookCode);
+        inventoryService.deleteBookByCode(bookCode);
     }
 
     private void searchBookMenu() {
@@ -116,9 +112,8 @@ public class BookView {
         }
 
         System.out.println("Data Buku Novel: ");
-
+        System.out.println("-".repeat(120));
         String formatNovel = String.format("%-10s %-30s %-30s %-30s %-30s", "Kode", "Judul", "Penulis", "Penerbit", "Tahun Terbit");
-
         System.out.println(formatNovel);
         for (Object book : books) {
             if (book instanceof Novel) {
@@ -129,6 +124,7 @@ public class BookView {
         }
 
         System.out.println("Data Majalah: ");
+        System.out.println("-".repeat(120));
         String formatMagazine = String.format("%-10s %-30s %-30s %-30s", "Kode", "Judul", "Penerbit", "Tahun Terbit");
 
         System.out.print(formatMagazine);
